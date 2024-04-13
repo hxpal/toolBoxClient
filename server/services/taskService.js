@@ -294,7 +294,7 @@ class TaskService {
         let url=this.webSocketService.createTaskWebSocket(taskName,(msg)=>{
             // console.log('收到任务进程消息',msg);
             this.processMsg(taskName,msg,taskDataJson)});
-        const childProcess = spawn(execPath,[scriptPath,url]);
+        const childProcess = spawn('node',[scriptPath,url]);
         this.webSocketService.sendToFront(this.taskLogMessage(`任务:${this.shortTaskName(taskName)}开始执行`));
         childProcess.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
